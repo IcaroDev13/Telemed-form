@@ -4,46 +4,147 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Telemedicina Express – Avaliação Rápida</title>
+  <meta name="description" content="Formulário-isca para qualificar empresas interessadas em telemedicina: reduza tempo de espera, corte absenteísmo e aumente a produtividade." />
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container">
-    <nav class="nav">
-      <div class="brand"><div class="logo"></div><h1>Telemedicina Express</h1></div>
+    <nav class="nav" aria-label="Topo">
+      <div class="brand"><div class="logo" aria-hidden="true"></div><h1>Telemedicina Express</h1></div>
+      <div class="badges" aria-label="Provas sociais">
+        <span class="badge">SLA médio &lt; 5 min</span>
+        <span class="badge">Cobertura nacional</span>
+        <span class="badge">Relatórios para RH</span>
+      </div>
     </nav>
 
-    <section class="hero">
-      <div class="panel">
+    <section class="hero" aria-label="Destaque + Formulário">
+      <!-- Painel Esquerdo: Copy de valor -->
+      <div class="panel" role="article">
         <h2>Atendimento médico em minutos, não em horas ⏱️</h2>
-        <p>Reduza o tempo de espera em até <strong>90%</strong>, corte o absenteísmo e aumente a produtividade.</p>
+        <p class="subtitle">Reduza o tempo de espera em até <strong>90%</strong>, corte o absenteísmo e aumente a produtividade com um ecossistema de telemedicina pensado para empresas.</p>
+        <div class="benefits" role="list">
+          <div class="benefit" role="listitem">
+            <strong>⚡ Rápido</strong>
+            <span>Consultas 24/7, triagem inteligente e encaminhamento sem fricção.</span>
+          </div>
+          <div class="benefit" role="listitem">
+            <strong>📉 Menos afastamentos</strong>
+            <span>Reduza faltas e custos com atestados desnecessários.</span>
+          </div>
+          <div class="benefit" role="listitem">
+            <strong>💰 Economia</strong>
+            <span>Planos sob medida e relatórios para decisões de RH.</span>
+          </div>
+          <div class="benefit" role="listitem">
+            <strong>🔒 LGPD-first</strong>
+            <span>Segurança e privacidade como padrão desde o design.</span>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <p class="footnotes">Preencha a avaliação rápida ao lado (2 minutos) e receba um diagnóstico com sugestões práticas para seu cenário.</p>
       </div>
 
-      <div class="panel">
-        <h2>Avaliação Rápida</h2>
-        <form action="#" method="POST">
-          <label for="empresa">Nome da empresa</label>
-          <input id="empresa" name="empresa" type="text" required>
+      <!-- Painel Direito: Formulário Isca -->
+      <div class="panel" role="form" aria-labelledby="form-title">
+        <h2 id="form-title">Avaliação Rápida – Descubra se Telemedicina faz sentido para sua empresa</h2>
+        <p class="subtitle">Responda 5 perguntas e veja como reduzir esperas e custos ainda neste trimestre.</p>
 
-          <label for="nome">Seu nome</label>
-          <input id="nome" name="nome" type="text" required>
+        <!-- IMPORTANTE: Substitua o action com seu endpoint (n8n/Make/Zapier/Google Forms) -->
+        <form id="leadForm" action="#" method="POST">
+          <!-- Empresa e contato -->
+          <div class="field">
+            <label for="empresa">Nome da empresa</label>
+            <input id="empresa" name="empresa" type="text" placeholder="Ex.: ACME Tecnologia" required />
+          </div>
+          <div class="field">
+            <label for="nome">Seu nome</label>
+            <input id="nome" name="nome" type="text" placeholder="Ex.: Ícaro Silva" required />
+          </div>
+          <div class="field">
+            <label for="email">E-mail corporativo</label>
+            <input id="email" name="email" type="email" placeholder="voce@empresa.com" required />
+          </div>
+          <div class="field">
+            <label for="telefone">WhatsApp</label>
+            <input id="telefone" name="telefone" type="tel" inputmode="tel" placeholder="(11) 91234-5678" />
+            <span class="hint">Opcional, mas agiliza o retorno.</span>
+          </div>
 
-          <label for="email">E-mail</label>
-          <input id="email" name="email" type="email" required>
+          <!-- Qualificação de dor e porte -->
+          <div class="field">
+            <label for="colab">Quantos colaboradores sua empresa possui?</label>
+            <select id="colab" name="colaboradores" required>
+              <option value="" disabled selected>Selecione</option>
+              <option>1 – 4</option>
+              <option>5 – 9</option>
+              <option>10 – 49</option>
+              <option>50 – 99</option>
+              <option>100 – 499</option>
+              <option>500+</option>
+            </select>
+          </div>
 
-          <label for="colab">Colaboradores</label>
-          <select id="colab" name="colaboradores" required>
-            <option value="1-4">1-4</option>
-            <option value="5-9">5-9</option>
-            <option value="10-49">10-49</option>
-            <option value="50-99">50-99</option>
-            <option value="100-499">100-499</option>
-            <option value="500+">500+</option>
-          </select>
+          <div class="field">
+            <label>Hoje, quanto tempo leva para conseguir atendimento médico simples?</label>
+            <div class="options" role="group" aria-label="Tempo de espera">
+              <label class="opt"><input type="radio" name="tempo_espera" value="&lt;1h" required> Menos de 1h</label>
+              <label class="opt"><input type="radio" name="tempo_espera" value="1-3h"> De 1h a 3h</label>
+              <label class="opt"><input type="radio" name="tempo_espera" value="&gt;3h"> Mais de 3h</label>
+            </div>
+          </div>
 
-          <button type="submit">Enviar</button>
+          <div class="field">
+            <label>Isso impacta produtividade e bem-estar?</label>
+            <div class="options" role="group" aria-label="Impacto">
+              <label class="opt"><input type="radio" name="impacto" value="alto" required> Sim, bastante</label>
+              <label class="opt"><input type="radio" name="impacto" value="moderado"> Um pouco</label>
+              <label class="opt"><input type="radio" name="impacto" value="nenhum"> Não</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Há custos extras (absenteísmo, horas improdutivas)?</label>
+            <div class="options" role="group" aria-label="Custos">
+              <label class="opt"><input type="radio" name="custos" value="constante" required> Sim, constantemente</label>
+              <label class="opt"><input type="radio" name="custos" value="as_vezes"> Às vezes</label>
+              <label class="opt"><input type="radio" name="custos" value="nao"> Não</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Se existisse uma solução que reduzisse em até 90% esse tempo, gostaria de conhecer?</label>
+            <div class="options" role="group" aria-label="Interesse">
+              <label class="opt"><input type="radio" name="interesse" value="sim" required> Sim</label>
+              <label class="opt"><input type="radio" name="interesse" value="nao"> Não</label>
+            </div>
+          </div>
+
+          <div class="checkbox">
+            <input id="lgpd" name="lgpd" type="checkbox" required />
+            <label for="lgpd">Autorizo o contato para envio do diagnóstico e concordo com o tratamento dos meus dados conforme a <a href="#" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Quero ver como funciona</button>
+            <span class="hint">⏱️ Leva ~2 minutos</span>
+          </div>
+
+          <!-- Campos ocultos para tracking UTM (opcional) -->
+          <input type="hidden" name="utm_source" value="whatsapp" />
+          <input type="hidden" name="utm_campaign" value="isca_telemedicina" />
         </form>
+
+        <div class="divider"></div>
+        <p class="footnotes">Dica: após o envio, encaminhamos um resumo com oportunidades de ganho (tempo, custos e experiência do colaborador) e um roteiro de implantação em 10 minutos.</p>
       </div>
     </section>
+
+    <footer class="container" style="padding-left:0;padding-right:0">
+      <p class="footnotes">© 2025 Telemedicina Express • Conteúdo meramente ilustrativo. Substitua marcas, cores e política de privacidade pelas da sua empresa.</p>
+    </footer>
   </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
