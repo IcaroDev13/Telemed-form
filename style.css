@@ -1,0 +1,18 @@
+:root{
+  --bg:#0f172a;
+  --card:#0b1226;
+  --text:#e2e8f0;
+  --primary:#22d3ee;
+}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.container{max-width:960px;margin:0 auto;padding:20px;}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.logo{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--primary),#a78bfa);}
+.panel{background:var(--card);padding:20px;border-radius:12px;margin-bottom:20px;}
+input,select,button{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #333;}
+button{background:var(--primary);color:#04121a;font-weight:bold;cursor:pointer;}
