@@ -27,7 +27,23 @@ a{color:var(--primary)}
 .brand{display:flex;align-items:center;gap:12px}
 .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:var(--shadow)}
 .brand h1{font-size:1.1rem;margin:0;color:var(--text);letter-spacing:.3px}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
+..hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+  text-align:center;
+}
+.panel{
+  max-width:800px;
+  width:100%;
+}
+form{
+  max-width:600px;
+  margin:0 auto;
+  text-align:left; /* só o formulário fica alinhado à esquerda */
+}
+
 .panel{background:linear-gradient(180deg, rgba(11,18,38,.95), rgba(11,18,38,.86)); border:1px solid rgba(148,163,184,.15); padding:28px; border-radius:var(--radius); box-shadow:var(--shadow)}
 .panel h2{margin:0 0 10px;font-size:1.8rem}
 .subtitle{color:var(--muted);margin-top:4px}
