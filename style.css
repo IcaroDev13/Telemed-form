@@ -1,16 +1,15 @@
-:root{
-  --bg:#0f172a;           /* slate-900 */
-  --card:#0b1226;         /* darker card */
-  --muted:#94a3b8;        /* slate-400 */
-  --text:#e2e8f0;         /* slate-200 */
-  --primary:#22d3ee;      /* cyan-400 */
-  --primary-2:#06b6d4;    /* cyan-500 */
-  --accent:#a78bfa;       /* violet-400 */
-  --danger:#ef4444;       /* red-500 */
-  --ok:#34d399;           /* emerald-400 */
-  --shadow: 0 10px 30px rgba(2,8,23,.5);
+:root {
+  --bg: #F9FAFB;          /* fundo claro */
+  --card: #FFFFFF;        /* caixas em branco */
+  --muted: #6B7280;       /* cinza para textos auxiliares */
+  --text: #1F2937;        /* cinza escuro para textos */
+  --primary: #0052CC;     /* azul Gleebem */
+  --primary-2: #0041A8;   /* variação mais escura do azul */
+  --accent: #00BFA6;      /* verde de apoio */
+  --shadow: 0 6px 20px rgba(0,0,0,0.08);
   --radius: 16px;
 }
+
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
