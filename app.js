@@ -42,46 +42,51 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-(function () {
+(() => {
+  'use strict';
+
   const form = document.getElementById('leadForm');
-  if (!form) return;
+  if (!form) return console.error('Form #leadForm não encontrado');
 
-  // >>> Ajuste aqui <<<
-  const N8N_URL = 'https://cunning-dashing-kite.ngrok-free.app/webhook/lead/landing';
+  // Use SEMPRE a Production URL (/webhook/, não /webhook-test/)
+  const WEBHOOK_URL = "https://cunning-dashing-kite.ngrok-free.app/webhook/lead/landing"; // troque aqui
 
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // evita o POST para o HTML (que causava 405)
 
-    const btn = form.querySelector('button[type="submit"]');
-    if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+    // Coleta os campos do formulário
+    const fd = new FormData(form);
+    const data = Object.fromEntries(fd.entries());
+
+    // Ajustes úteis
+    data.telefone = (data.telefone || '').replace(/\D/g, ''); // só dígitos
+    data.lgpd = form.lgpd?.checked === true;                  // booleano
+
+    // UTM via URL (caso a página receba ?utm_source=...)
+    const params = new URLSearchParams(location.search);
+    if (!data.utm_source && params.get('utm_source')) data.utm_source = params.get('utm_source');
+    if (!data.utm_campaign && params.get('utm_campaign')) data.utm_campaign = params.get('utm_campaign');
 
     try {
-      const formData = new FormData(form); // evita preflight e é 100% compatível com n8n
-      const res = await fetch(N8N_URL, { method: 'POST', body: formData });
-      if (!res.ok) throw new Error('Falha no envio');
+      const r = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        mode: 'cors'
+      });
 
-      // Sucesso
-      alert('Recebemos suas respostas! Em instantes entraremos em contato.');
-      form.reset();
+      const j = await r.json().catch(() => null);
+
+      if (r.ok) {
+        alert(j?.message || 'Enviado com sucesso!');
+        form.reset();
+      } else {
+        alert(j?.message || 'Não foi possível enviar. Tente novamente.');
+        console.error('n8n erro', r.status, j);
+      }
     } catch (err) {
+      alert('Falha de rede. Verifique sua internet ou se o ngrok está ativo.');
       console.error(err);
-      alert('Não foi possível enviar agora. Tente novamente em instantes.');
-    } finally {
-      if (btn) { btn.disabled = false; btn.textContent = 'Quero ver como funciona (Gratuito)'; }
     }
   });
 })();
-
-const URL_N8N = "https://cunning-dashing-kite.ngrok-free.app/webhook/lead/landing";
-form.addEventListener("submit", async (e)=>{
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form).entries());
-  const r = await fetch(URL_N8N, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify(data),
-    mode: "cors",
-  });
-  const j = await r.json().catch(()=>({}));
-  alert(j?.message || "Enviado!");
-});
