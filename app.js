@@ -15,6 +15,8 @@
   }, false);
 })();
 
+const WEBHOOK_URL = 'http://localhost:5678/webhook-test/d2398dda-5353-4a24-85fb-35d452efd778';
+
 // Máscara para telefone no formato (99) 9 9999-9999
 document.addEventListener('DOMContentLoaded', function () {
   const telInput = document.getElementById('telefone');
