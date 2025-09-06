@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!form) return;
 
   // >>> Ajuste aqui <<<
-  const N8N_URL = 'https://SEU_TUNEL_PUBLICO/webhook/telemed-form';
+  const N8N_URL = 'https://cunning-dashing-kite.ngrok-free.app/webhook/lead/landing';
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
