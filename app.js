@@ -15,8 +15,6 @@
   }, false);
 })();
 
-const WEBHOOK_URL = 'http://localhost:5678/webhook-test/d2398dda-5353-4a24-85fb-35d452efd778';
-
 // Máscara para telefone no formato (99) 9 9999-9999
 document.addEventListener('DOMContentLoaded', function () {
   const telInput = document.getElementById('telefone');
@@ -42,4 +40,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     e.target.value = value;
   });
+});
+
+(function () {
+  const form = document.getElementById('leadForm');
+  if (!form) return;
+
+  // >>> Ajuste aqui <<<
+  const N8N_URL = 'https://SEU_TUNEL_PUBLICO/webhook/telemed-form';
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+
+    try {
+      const formData = new FormData(form); // evita preflight e é 100% compatível com n8n
+      const res = await fetch(N8N_URL, { method: 'POST', body: formData });
+      if (!res.ok) throw new Error('Falha no envio');
+
+      // Sucesso
+      alert('Recebemos suas respostas! Em instantes entraremos em contato.');
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      alert('Não foi possível enviar agora. Tente novamente em instantes.');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = 'Quero ver como funciona (Gratuito)'; }
+    }
+  });
+})();
+
+const URL_N8N = "https://cunning-dashing-kite.ngrok-free.app/webhook/lead/landing";
+form.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form).entries());
+  const r = await fetch(URL_N8N, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(data),
+    mode: "cors",
+  });
+  const j = await r.json().catch(()=>({}));
+  alert(j?.message || "Enviado!");
 });
