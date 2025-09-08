@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!form) return console.error('Form #leadForm não encontrado');
 
   // Use SEMPRE a Production URL (/webhook/, não /webhook-test/)
-  const WEBHOOK_URL = "https://cunning-dashing-kite.ngrok-free.app/webhook/github-pages"; // troque aqui
+  const WEBHOOK_URL = "https://cunning-dashing-kite.ngrok-free.app/webhook-test/github-pages"; // troque aqui
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault(); // evita o POST para o HTML (que causava 405)
